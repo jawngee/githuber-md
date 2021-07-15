@@ -67,6 +67,7 @@ class MarkdownParser extends Parsedown {
 	 * @param string $text Markdown content.
 	 */
 	public function transform( $text ) {
+		$text = apply_filters('githuber-md/pre-transform', $text);
 
 		// Preserve anything inside a single-line <code> element
 		if ( $this->preserve_inline_code_blocks ) {
@@ -80,6 +81,8 @@ class MarkdownParser extends Parsedown {
 		$parsed_content = $this->text( $text );
 
 		$parsed_content = $this->do_restore( $parsed_content );
+
+		$parsed_content = apply_filters('githuber-md/parsed_content', $parsed_content);
 
 		return $parsed_content;
 	}

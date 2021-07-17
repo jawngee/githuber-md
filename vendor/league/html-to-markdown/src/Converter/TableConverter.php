@@ -36,7 +36,8 @@ class TableConverter implements ConverterInterface
                 return trim($element->getValue());
 
             case 'thead':
-                $headerLine = reset($element->getChildren())->getValue();
+            	$children = $element->getChildren();
+                $headerLine = reset($children)->getValue();
                 $headers = explode(' | ', trim(trim($headerLine, "\n"), '|'));
 
                 $hr = [];
